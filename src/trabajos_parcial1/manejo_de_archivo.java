@@ -15,7 +15,6 @@ public class manejo_de_archivo {
             while((cadena= in.readLine())!=null){
                 String[] datos = cadena.split(",");
                 int longitud = datos.length;
-                //System.out.println("la longitud es "+longitud);
                 for(i=0; i<longitud; i++) {
                     numeros[cuenta][i] = Integer.parseInt(datos[i]);
 
@@ -25,40 +24,32 @@ public class manejo_de_archivo {
             }
             acomodar(numeros,cuenta,i);
             in.close();
-            System.out.println("se encontro el archivo");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
     }
     public static void acomodar(int[][] a, int n1,int n2) {
-        //System.out.println(n1);
         int i=0;
         for(int t=0; t<n1; t++) {
-            for (int k = 0; k < n1; k++) {
+            for (int k = 0; k < n1; k++)
                 for (int j = 0; j < n1; j++) {
                     for (i = 0; i < n2 - 1; i++) {
                         if (a[j][i] > a[j][i + 1]) {
                             int temp = a[j][i];
                             a[j][i] = a[j][i + 1];
                             a[j][i + 1] = temp;
-                            //  System.out.println("\n"+temp+"anterior "+a[j][i]+" posterior"+ a[j][i+1]);
                         }
-
-                        //System.out.println("\n");
                     }
                     if (j + 1 < n1) {
                         if (a[j][i] > a[j + 1][0]) {
                             int temp = a[j + 1][0];
                             a[j + 1][0] = a[j][i];
                             a[j][i] = temp;
-                            //System.out.println("temporal"+temp+"anterior "+a[j][i]+" posterior"+ a[j+1][0]);
-                            //System.out.println("pasa por aqui");
                         }
                     }
 
                 }
-            }
         }
         repeticiones(a,n1,n2);
        double ressultado=promedio(a,n1,n2);
