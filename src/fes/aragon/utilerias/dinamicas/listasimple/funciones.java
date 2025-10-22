@@ -1,4 +1,4 @@
-package trabajos_parcial1.interfaz_de_10_funciones;
+package fes.aragon.utilerias.dinamicas.listasimple;
 
 public interface funciones {
     public void insertar(Object valor, Object[] l); //Objet[] l es un arreglo que se solicita
