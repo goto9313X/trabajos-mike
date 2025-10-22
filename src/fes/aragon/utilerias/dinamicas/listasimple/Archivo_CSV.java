@@ -3,7 +3,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-public class manejo_de_archivo {
+public class Archivo_CSV {
     public static void leerArchivo(String Narchivo) {
         File archi = new File(Narchivo);
         int[][] numeros= new int[100][100];
