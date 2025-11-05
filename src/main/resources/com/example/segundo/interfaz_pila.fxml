@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" maxHeight="600.0" maxWidth="800.0" minHeight="800.0" minWidth="1000.0" prefHeight="600.0" prefWidth="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.segundo.control">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <Label prefHeight="78.0" prefWidth="362.0" text="introduce el mensaje encriptado">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Label>
+   <TextArea fx:id="textArea" prefHeight="45.0" prefWidth="560.0">
+       <font>
+         <Font size="14.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="DEFAULT" />
+      </cursor>
+   </TextArea>
+    <Button onAction="#onHelloButtonClick" prefHeight="50.0" prefWidth="124.0" text="decencriptar">
+      <font>
+         <Font size="18.0" />
+      </font></Button>
+
+    <Label fx:id="welcomeText" prefHeight="104.0" prefWidth="606.0">
+      <font>
+         <Font size="14.0" />
+      </font></Label>
+   <Label fx:id="alerta" prefHeight="81.0" prefWidth="297.0" textFill="RED">
+      <font>
+         <Font name="System Bold Italic" size="14.0" />
+      </font>
+   </Label>
+</VBox>
