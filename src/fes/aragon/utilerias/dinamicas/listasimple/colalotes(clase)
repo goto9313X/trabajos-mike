@@ -1,0 +1,16 @@
+package fes.aragon.utilerias.dinamicas.cola;
+
+public class LoteAcciones {
+    public int cantidad;
+    public double precioCompra;
+
+    public LoteAcciones(int cantidad, double precioCompra) {
+        this.cantidad = cantidad;
+        this.precioCompra = precioCompra;
+    }
+
+    @Override
+    public String toString() {
+        return "Cantidad: " + cantidad + " @ $" + precioCompra;
+    }
+}
