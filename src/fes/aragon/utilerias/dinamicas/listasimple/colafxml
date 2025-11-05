@@ -1,0 +1,62 @@
+package fes.aragon.gui;
+
+import fes.aragon.utilerias.dinamicas.cola.Cola;
+import fes.aragon.utilerias.dinamicas.cola.LoteAcciones;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+
+public class ColaAccionesController {
+    @FXML private TextField cantidadCompra;
+    @FXML private TextField precioCompra;
+    @FXML private TextField cantidadVenta;
+    @FXML private TextField precioVenta;
+    @FXML private Label resultadoGanancia;
+    @FXML private ListView<String> listaLotes;
+
+    private Cola<LoteAcciones> cola = new Cola<>();
+
+    @FXML
+    private void agregarCompra() {
+        int cantidad = Integer.parseInt(cantidadCompra.getText());
+        double precio = Double.parseDouble(precioCompra.getText());
+        cola.insertar(new LoteAcciones(cantidad, precio));
+        actualizarLista();
+        cantidadCompra.clear();
+        precioCompra.clear();
+    }
+
+    @FXML
+    private void realizarVenta() {
+        int cantidad = Integer.parseInt(cantidadVenta.getText());
+        double precio = Double.parseDouble(precioVenta.getText());
+        double ganancia = calcularGanancia(cantidad, precio);
+        resultadoGanancia.setText(String.format("$%.2f", ganancia));
+        actualizarLista();
+        cantidadVenta.clear();
+        precioVenta.clear();
+    }
+
+    private double calcularGanancia(int accionesAVender, double precioVenta) {
+        double gananciaTotal = 0.0;
+        while (accionesAVender > 0 && !cola.esVacia()) {
+            LoteAcciones lote = cola.primerElemento();
+            int cantidadVendida = Math.min(accionesAVender, lote.cantidad);
+            gananciaTotal += cantidadVendida * (precioVenta - lote.precioCompra);
+            accionesAVender -= cantidadVendida;
+            if (cantidadVendida == lote.cantidad) {
+                cola.extraer();
+            } else {
+                lote.cantidad -= cantidadVendida;
+            }
+        }
+        return gananciaTotal;
+    }
+
+    private void actualizarLista() {
+        listaLotes.getItems().clear();
+        for (int i = 0; i < cola.getLongitud(); i++) {
+            LoteAcciones lote = cola.getIndice(i);
+            listaLotes.getItems().add(lote.toString());
+        }
+    }
+}
