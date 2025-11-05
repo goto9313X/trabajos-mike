@@ -1,0 +1,120 @@
+module com.example.josephus {
+    requires javafx.controls;
+    requires javafx.fxml;
+
+    opens com.example.josephus to javafx.fxml;
+    exports com.example.josephus;
+}
+package com.example.josephus;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class JosephusApp extends Application {
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("josephus-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Problema del Verdugo (Josephus)");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+}
+package com.example.josephus;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class JosephusController {
+
+    @FXML
+    private TextField txtN, txtK, txtAmigo;
+
+    @FXML
+    private Label lblResultado;
+
+    @FXML
+    protected void calcular() {
+        try {
+            int n = Integer.parseInt(txtN.getText());
+            int k = Integer.parseInt(txtK.getText());
+            int amigo = Integer.parseInt(txtAmigo.getText());
+
+            if (amigo < 1 || amigo > n) {
+                lblResultado.setText("⚠️ La posición del amigo debe estar entre 1 y " + n);
+                return;
+            }
+
+            int primerFusilado = encontrarPrimerFusilado(n, k, amigo);
+            lblResultado.setText("👉 El verdugo debe fusilar primero al prisionero #" + primerFusilado);
+        } catch (NumberFormatException e) {
+            lblResultado.setText("⚠️ Ingresa solo números válidos.");
+        }
+    }
+
+    private int encontrarPrimerFusilado(int n, int k, int amigo) {
+        for (int primer = 1; primer <= n; primer++) {
+            if (simularJosephus(n, k, primer) == amigo) {
+                return primer;
+            }
+        }
+        return -1;
+    }
+
+    private int simularJosephus(int n, int k, int primerFusilado) {
+        List<Integer> prisioneros = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            prisioneros.add(i);
+        }
+
+        int index = prisioneros.indexOf(primerFusilado);
+        prisioneros.remove(index);
+
+        while (prisioneros.size() > 1) {
+            index = (index + k - 1) % prisioneros.size();
+            prisioneros.remove(index);
+        }
+
+        return prisioneros.get(0);
+    }
+}
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.josephus.JosephusController"
+      alignment="CENTER"
+      spacing="10"
+      style="-fx-background-color: #f2f2f2; -fx-padding: 20;">
+      
+    <Label text="Problema del Verdugo (Josephus)"
+           style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <TextField fx:id="txtN" promptText="Número de prisioneros (n)" />
+    <TextField fx:id="txtK" promptText="Valor de k (intervalo)" />
+    <TextField fx:id="txtAmigo" promptText="Posición del amigo" />
+
+    <Button text="Calcular primer fusilado"
+            onAction="#calcular"
+            style="-fx-background-color: #0078D7; -fx-text-fill: white;"/>
+
+    <Label fx:id="lblResultado"
+           text="Resultado:"
+           style="-fx-font-size: 14px; -fx-text-fill: #333333;"/>
+
+</VBox>
