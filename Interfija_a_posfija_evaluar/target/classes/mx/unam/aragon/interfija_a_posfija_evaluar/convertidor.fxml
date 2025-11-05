@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="mx.unam.aragon.interfija_a_posfija_evaluar.ConvertidorController"
+            prefWidth="400" prefHeight="250" style="-fx-padding:20;">
+    <children>
+        <Label text="Conversión Infija → Posfija" layoutX="90" layoutY="20" style="-fx-font-size:16px; -fx-font-weight:bold;"/>
+        <Label text="Expresión infija:" layoutX="40" layoutY="80"/>
+        <TextField fx:id="txtInfija" layoutX="150" layoutY="75" prefWidth="200"/>
+        <Button fx:id="btnConvertir" text="Convertir" layoutX="150" layoutY="120" prefWidth="100"/>
+        <Label fx:id="lblPosfija" layoutX="150" layoutY="170" prefWidth="200" style="-fx-font-weight:bold;"/>
+    </children>
+</AnchorPane>

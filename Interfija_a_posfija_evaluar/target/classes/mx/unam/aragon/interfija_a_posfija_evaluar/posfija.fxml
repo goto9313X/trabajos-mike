@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="mx.unam.aragon.interfija_a_posfija_evaluar.PosfijaController"
+            prefWidth="400" prefHeight="250"
+            style="-fx-background-color: #eaf6ff; -fx-padding: 20;">
+    <children>
+        <Label text="Evaluar Expresión Posfija"
+               layoutX="90" layoutY="20"
+               style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+        <Label text="Expresión Posfija:"
+               layoutX="50" layoutY="80" />
+
+        <TextField fx:id="txtPosfija"
+                   layoutX="180" layoutY="75"
+                   prefWidth="150" />
+
+        <Button fx:id="btnEvaluar"
+                text="Evaluar"
+                layoutX="180" layoutY="120"
+                prefWidth="100" />
+
+        <Label fx:id="lblResultado"
+               layoutX="50" layoutY="180"
+               prefWidth="300"
+               style="-fx-font-weight: bold;" />
+    </children>
+</AnchorPane>
